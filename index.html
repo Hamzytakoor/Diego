@@ -17,6 +17,7 @@
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Encabezado y Navegación */
@@ -25,6 +26,9 @@
             color: #ecf0f1;
             padding: 1rem 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header h1 {
@@ -46,13 +50,14 @@
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         nav ul li a:hover {
             color: #3498db;
         }
 
-        /* Sección Hero (Bienvenida) */
+        /* Sección Hero */
         .hero {
             background-color: #3498db;
             color: white;
@@ -148,10 +153,135 @@
             transition: background 0.3s;
             cursor: pointer;
             border: none;
+            width: 100%;
         }
 
         .btn:hover {
             background-color: #c0392b;
+        }
+
+        /* --- ESTILOS DEL CARRITO INTERACTIVO --- */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        #overlay.activo {
+            display: block;
+        }
+
+        .carrito-lateral {
+            position: fixed;
+            top: 0;
+            right: -400px; /* Oculto fuera de la pantalla */
+            width: 400px;
+            height: 100vh;
+            background-color: #fff;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            z-index: 999;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carrito-lateral.abierto {
+            right: 0;
+        }
+
+        .carrito-header {
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-cerrar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .carrito-items {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .carrito-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .carrito-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .carrito-item-info {
+            flex: 1;
+        }
+
+        .carrito-item-titulo {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .carrito-item-precio {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .btn-eliminar {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .carrito-footer {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .carrito-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: right;
+            color: #2c3e50;
+        }
+
+        .btn-pagar {
+            background-color: #27ae60;
+        }
+
+        .btn-pagar:hover {
+            background-color: #219653;
+        }
+
+        .carrito-vacio-msg {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 50px;
         }
 
         /* Pie de Página */
@@ -167,6 +297,10 @@
         @media (max-width: 768px) {
             .product-card {
                 flex: 1 1 calc(50% - 20px);
+            }
+            .carrito-lateral {
+                width: 100%;
+                right: -100%;
             }
         }
 
@@ -190,10 +324,26 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="proximamente.html">Tienda</a></li>
                 <li><a href="proximamente.html">Nosotros</a></li>
-                <li><a href="proximamente.html">🛒 Carrito (0)</a></li>
+                <li><a id="abrir-carrito">🛒 Carrito (<span id="contador-carrito">0</span>)</a></li>
             </ul>
         </nav>
     </header>
+
+    <div id="overlay"></div>
+
+    <div class="carrito-lateral" id="carrito-lateral">
+        <div class="carrito-header">
+            <h2>Tu Carrito</h2>
+            <button class="btn-cerrar" id="cerrar-carrito">&times;</button>
+        </div>
+        <div class="carrito-items" id="lista-carrito">
+            <p class="carrito-vacio-msg">Tu carrito está vacío.</p>
+        </div>
+        <div class="carrito-footer">
+            <div class="carrito-total">Total: $<span id="total-precio">0.00</span></div>
+            <button class="btn btn-pagar" onclick="window.location.href='proximamente.html'">Proceder al Pago</button>
+        </div>
+    </div>
 
     <section class="hero">
         <h2>Conectividad de Nueva Generación</h2>
@@ -210,7 +360,7 @@
                 <p class="product-desc">Internet de alta velocidad y baja latencia con el avanzado router Wi-Fi 6.</p>
                 <div class="product-price">$639.00</div>
                 <div class="real-price">Valor de Mercado: $599.00</div>
-                <button class="btn" onclick="window.location.href='proximamente.html'">Añadir al Carrito</button>
+                <button class="btn agregar-carrito" data-id="1" data-nombre="Kit Estándar Starlink Gen 3" data-precio="639.00" data-img="https://api.starlink.com/public-files/Starlink_Standard_White.png">Añadir al Carrito</button>
             </article>
 
             <article class="product-card">
@@ -219,7 +369,7 @@
                 <p class="product-desc">Internet satelital ultraportátil y compacto, ideal para usuarios en movimiento.</p>
                 <div class="product-price">$639.00</div>
                 <div class="real-price">Valor de Mercado: $599.00</div>
-                <button class="btn" onclick="window.location.href='proximamente.html'">Añadir al Carrito</button>
+                <button class="btn agregar-carrito" data-id="2" data-nombre="Kit Starlink Mini" data-precio="639.00" data-img="https://api.starlink.com/public-files/Mini_Right_Angled.png">Añadir al Carrito</button>
             </article>
 
             <article class="product-card">
@@ -228,7 +378,7 @@
                 <p class="product-desc">Conecta tus dispositivos directamente al router para máxima estabilidad.</p>
                 <div class="product-price">$65.00</div>
                 <div class="real-price">Valor de Mercado: $25.00</div>
-                <button class="btn" onclick="window.location.href='proximamente.html'">Añadir al Carrito</button>
+                <button class="btn agregar-carrito" data-id="3" data-nombre="Adaptador Ethernet Starlink" data-precio="65.00" data-img="https://api.starlink.com/public-files/Ethernet_Adapter.png">Añadir al Carrito</button>
             </article>
         </div>
     </main>
@@ -236,6 +386,104 @@
     <footer>
         <p>&copy; 2026 El Mundo de Diego. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        // Variables principales
+        let carrito = [];
+        const botonesAgregar = document.querySelectorAll('.agregar-carrito');
+        const listaCarrito = document.getElementById('lista-carrito');
+        const contadorCarrito = document.getElementById('contador-carrito');
+        const totalPrecio = document.getElementById('total-precio');
+        
+        const btnAbrirCarrito = document.getElementById('abrir-carrito');
+        const btnCerrarCarrito = document.getElementById('cerrar-carrito');
+        const panelCarrito = document.getElementById('carrito-lateral');
+        const overlay = document.getElementById('overlay');
+
+        // Funciones para abrir y cerrar el panel lateral
+        function abrirPanel() {
+            panelCarrito.classList.add('abierto');
+            overlay.classList.add('activo');
+        }
+
+        function cerrarPanel() {
+            panelCarrito.classList.remove('abierto');
+            overlay.classList.remove('activo');
+        }
+
+        btnAbrirCarrito.addEventListener('click', abrirPanel);
+        btnCerrarCarrito.addEventListener('click', cerrarPanel);
+        overlay.addEventListener('click', cerrarPanel);
+
+        // Añadir evento a todos los botones "Añadir al Carrito"
+        botonesAgregar.forEach(boton => {
+            boton.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                const nombre = e.target.getAttribute('data-nombre');
+                const precio = parseFloat(e.target.getAttribute('data-precio'));
+                const imagen = e.target.getAttribute('data-img');
+
+                agregarAlCarrito(id, nombre, precio, imagen);
+                abrirPanel(); // Abre el carrito automáticamente para que el usuario vea su producto
+            });
+        });
+
+        function agregarAlCarrito(id, nombre, precio, imagen) {
+            // Verificar si el producto ya está en el carrito
+            const productoExistente = carrito.find(item => item.id === id);
+
+            if (productoExistente) {
+                productoExistente.cantidad++;
+            } else {
+                carrito.push({
+                    id: id,
+                    nombre: nombre,
+                    precio: precio,
+                    imagen: imagen,
+                    cantidad: 1
+                });
+            }
+            actualizarCarrito HTML();
+        }
+
+        function eliminarDelCarrito(id) {
+            carrito = carrito.filter(item => item.id !== id);
+            actualizarCarrito HTML();
+        }
+
+        // Renderizar el carrito visualmente
+        function actualizarCarrito HTML() {
+            listaCarrito.innerHTML = ''; // Limpiar lista
+            let total = 0;
+            let cantidadTotal = 0;
+
+            if (carrito.length === 0) {
+                listaCarrito.innerHTML = '<p class="carrito-vacio-msg">Tu carrito está vacío.</p>';
+            } else {
+                carrito.forEach(producto => {
+                    const subtotal = producto.precio * producto.cantidad;
+                    total += subtotal;
+                    cantidadTotal += producto.cantidad;
+
+                    const itemDIV = document.createElement('div');
+                    itemDIV.classList.add('carrito-item');
+                    itemDIV.innerHTML = `
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                        <div class="carrito-item-info">
+                            <div class="carrito-item-titulo">${producto.nombre}</div>
+                            <div class="carrito-item-precio">$${producto.precio.toFixed(2)} x ${producto.cantidad}</div>
+                        </div>
+                        <button class="btn-eliminar" onclick="eliminarDelCarrito('${producto.id}')">X</button>
+                    `;
+                    listaCarrito.appendChild(itemDIV);
+                });
+            }
+
+            // Actualizar contadores y totales en el HTML
+            contadorCarrito.textContent = cantidadTotal;
+            totalPrecio.textContent = total.toFixed(2);
+        }
+    </script>
 
 </body>
 </html>
