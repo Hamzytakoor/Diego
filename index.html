@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diego's World - Store</title>
+    <title>El Mundo de Diego - Tienda</title>
     <style>
-        /* Basic Reset & Variables */
+        /* Variables y Reseteo Básico */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,7 +19,7 @@
             line-height: 1.6;
         }
 
-        /* Header & Navigation */
+        /* Encabezado y Navegación */
         header {
             background-color: #2c3e50;
             color: #ecf0f1;
@@ -52,7 +52,7 @@
             color: #3498db;
         }
 
-        /* Hero Section */
+        /* Sección Hero (Bienvenida) */
         .hero {
             background-color: #3498db;
             color: white;
@@ -65,7 +65,7 @@
             margin-bottom: 10px;
         }
 
-        /* Main Container */
+        /* Contenedor Principal */
         .container {
             width: 90%;
             max-width: 1200px;
@@ -79,7 +79,7 @@
             color: #2c3e50;
         }
 
-        /* Products Grid */
+        /* Cuadrícula de Productos */
         .products-grid {
             display: flex;
             justify-content: space-between;
@@ -136,7 +136,7 @@
             margin-bottom: 15px;
         }
 
-        /* Buttons */
+        /* Botones */
         .btn {
             display: inline-block;
             background-color: #e74c3c;
@@ -154,7 +154,7 @@
             background-color: #c0392b;
         }
 
-        /* Footer */
+        /* Pie de Página */
         footer {
             background-color: #2c3e50;
             color: #bdc3c7;
@@ -163,7 +163,7 @@
             margin-top: 3rem;
         }
 
-        /* Responsive */
+        /* Diseño Responsivo */
         @media (max-width: 768px) {
             .product-card {
                 flex: 1 1 calc(50% - 20px);
@@ -184,57 +184,57 @@
 <body>
 
     <header>
-        <h1>DIEGO's WORLD</h1>
+        <h1>EL MUNDO DE DIEGO</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="coming-soon.html">Shop</a></li>
-                <li><a href="coming-soon.html">About Us</a></li>
-                <li><a href="coming-soon.html">🛒 Cart (0)</a></li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="proximamente.html">Tienda</a></li>
+                <li><a href="proximamente.html">Nosotros</a></li>
+                <li><a href="proximamente.html">🛒 Carrito (0)</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <h2>Next-Gen Connectivity</h2>
-        <p>Premium satellite hardware directly from Diego's World.</p>
+        <h2>Conectividad de Nueva Generación</h2>
+        <p>Hardware satelital premium directamente desde El Mundo de Diego.</p>
     </section>
 
     <main class="container">
-        <h2 class="section-title">Hardware & Accessories</h2>
+        <h2 class="section-title">Hardware y Accesorios</h2>
         
         <div class="products-grid">
             <article class="product-card">
-                <img src="https://api.starlink.com/public-files/Starlink_Standard_White.png" alt="Starlink Gen 3 Standard Kit" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Gen+3'">
-                <h3 class="product-title">Starlink Gen 3 Standard Kit</h3>
-                <p class="product-desc">High-speed, low-latency internet with the advanced Wi-Fi 6 router.</p>
+                <img src="https://api.starlink.com/public-files/Starlink_Standard_White.png" alt="Kit Estándar Starlink Gen 3" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Gen+3'">
+                <h3 class="product-title">Kit Estándar Starlink Gen 3</h3>
+                <p class="product-desc">Internet de alta velocidad y baja latencia con el avanzado router Wi-Fi 6.</p>
                 <div class="product-price">$639.00</div>
-                <div class="real-price">Market Value: $599.00</div>
-                <button class="btn" onclick="window.location.href='coming-soon.html'">Add to Cart</button>
+                <div class="real-price">Valor de Mercado: $599.00</div>
+                <button class="btn" onclick="window.location.href='proximamente.html'">Añadir al Carrito</button>
             </article>
 
             <article class="product-card">
-                <img src="https://api.starlink.com/public-files/Mini_Right_Angled.png" alt="Starlink Mini Kit" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Mini'">
-                <h3 class="product-title">Starlink Mini Kit</h3>
-                <p class="product-desc">Ultra-portable, compact satellite internet ideal for users on the move.</p>
+                <img src="https://api.starlink.com/public-files/Mini_Right_Angled.png" alt="Kit Starlink Mini" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Mini'">
+                <h3 class="product-title">Kit Starlink Mini</h3>
+                <p class="product-desc">Internet satelital ultraportátil y compacto, ideal para usuarios en movimiento.</p>
                 <div class="product-price">$639.00</div>
-                <div class="real-price">Market Value: $599.00</div>
-                <button class="btn" onclick="window.location.href='coming-soon.html'">Add to Cart</button>
+                <div class="real-price">Valor de Mercado: $599.00</div>
+                <button class="btn" onclick="window.location.href='proximamente.html'">Añadir al Carrito</button>
             </article>
 
             <article class="product-card">
-                <img src="https://api.starlink.com/public-files/Ethernet_Adapter.png" alt="Starlink Ethernet Adapter" onerror="this.src='https://via.placeholder.com/300x300.png?text=Ethernet+Adapter'">
-                <h3 class="product-title">Starlink Ethernet Adapter</h3>
-                <p class="product-desc">Hardwire your devices directly to the router for maximum stability.</p>
+                <img src="https://api.starlink.com/public-files/Ethernet_Adapter.png" alt="Adaptador Ethernet Starlink" onerror="this.src='https://via.placeholder.com/300x300.png?text=Adaptador+Ethernet'">
+                <h3 class="product-title">Adaptador Ethernet Starlink</h3>
+                <p class="product-desc">Conecta tus dispositivos directamente al router para máxima estabilidad.</p>
                 <div class="product-price">$65.00</div>
-                <div class="real-price">Market Value: $25.00</div>
-                <button class="btn" onclick="window.location.href='coming-soon.html'">Add to Cart</button>
+                <div class="real-price">Valor de Mercado: $25.00</div>
+                <button class="btn" onclick="window.location.href='proximamente.html'">Añadir al Carrito</button>
             </article>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Diego's World. All rights reserved.</p>
+        <p>&copy; 2026 El Mundo de Diego. Todos los derechos reservados.</p>
     </footer>
 
 </body>
