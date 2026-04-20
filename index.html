@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Mundo de Diego - Tienda</title>
+    <title>Diego's World - Store</title>
     <style>
-        /* Variables y Reseteo Básico */
+        /* Basic Reset & Variables */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,7 +19,7 @@
             line-height: 1.6;
         }
 
-        /* Encabezado y Navegación */
+        /* Header & Navigation */
         header {
             background-color: #2c3e50;
             color: #ecf0f1;
@@ -52,7 +52,7 @@
             color: #3498db;
         }
 
-        /* Sección Hero (Bienvenida) */
+        /* Hero Section */
         .hero {
             background-color: #3498db;
             color: white;
@@ -65,7 +65,7 @@
             margin-bottom: 10px;
         }
 
-        /* Contenedor Principal */
+        /* Main Container */
         .container {
             width: 90%;
             max-width: 1200px;
@@ -79,7 +79,7 @@
             color: #2c3e50;
         }
 
-        /* Cuadrícula de Productos */
+        /* Products Grid */
         .products-grid {
             display: flex;
             justify-content: space-between;
@@ -102,11 +102,12 @@
         }
 
         .product-card img {
-            max-width: 100%;
-            height: auto;
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
             border-radius: 5px;
             margin-bottom: 15px;
-            background-color: #eee; /* Fondo temporal para la imagen faltante */
+            background-color: #fff;
         }
 
         .product-title {
@@ -118,16 +119,24 @@
             font-size: 0.9rem;
             color: #666;
             margin-bottom: 15px;
+            min-height: 40px;
         }
 
         .product-price {
             font-size: 1.5rem;
             font-weight: bold;
             color: #27ae60;
+            margin-bottom: 5px;
+        }
+        
+        .real-price {
+            font-size: 0.8rem;
+            color: #95a5a6;
+            text-decoration: line-through;
             margin-bottom: 15px;
         }
 
-        /* Botones */
+        /* Buttons */
         .btn {
             display: inline-block;
             background-color: #e74c3c;
@@ -145,7 +154,7 @@
             background-color: #c0392b;
         }
 
-        /* Pie de Página */
+        /* Footer */
         footer {
             background-color: #2c3e50;
             color: #bdc3c7;
@@ -154,7 +163,7 @@
             margin-top: 3rem;
         }
 
-        /* Diseño Responsivo */
+        /* Responsive */
         @media (max-width: 768px) {
             .product-card {
                 flex: 1 1 calc(50% - 20px);
@@ -175,54 +184,57 @@
 <body>
 
     <header>
-        <h1>EL MUNDO DE DIEGO</h1>
+        <h1>DIEGO's WORLD</h1>
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Tienda</a></li>
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">🛒 Carrito (0)</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="coming-soon.html">Shop</a></li>
+                <li><a href="coming-soon.html">About Us</a></li>
+                <li><a href="coming-soon.html">🛒 Cart (0)</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <h2>¡Bienvenido al Mundo de Diego!</h2>
-        <p>Explora nuestra colección exclusiva y lleva tu estilo al siguiente nivel.</p>
+        <h2>Next-Gen Connectivity</h2>
+        <p>Premium satellite hardware directly from Diego's World.</p>
     </section>
 
     <main class="container">
-        <h2 class="section-title">Nuestros Productos</h2>
+        <h2 class="section-title">Hardware & Accessories</h2>
         
         <div class="products-grid">
             <article class="product-card">
-                <img src="https://via.placeholder.com/300x300.png?text=Camiseta+Diego" alt="Camiseta Oficial">
-                <h3 class="product-title">Camiseta Oficial</h3>
-                <p class="product-desc">Camiseta 100% algodón con el logo original. Muy cómoda.</p>
-                <div class="product-price">$25.00</div>
-                <button class="btn">Añadir al Carrito</button>
+                <img src="https://api.starlink.com/public-files/Starlink_Standard_White.png" alt="Starlink Gen 3 Standard Kit" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Gen+3'">
+                <h3 class="product-title">Starlink Gen 3 Standard Kit</h3>
+                <p class="product-desc">High-speed, low-latency internet with the advanced Wi-Fi 6 router.</p>
+                <div class="product-price">$639.00</div>
+                <div class="real-price">Market Value: $599.00</div>
+                <button class="btn" onclick="window.location.href='coming-soon.html'">Add to Cart</button>
             </article>
 
             <article class="product-card">
-                <img src="https://via.placeholder.com/300x300.png?text=Taza+Mundo" alt="Taza de Cerámica">
-                <h3 class="product-title">Taza Coleccionable</h3>
-                <p class="product-desc">Perfecta para el café de la mañana. Capacidad de 350ml.</p>
-                <div class="product-price">$15.00</div>
-                <button class="btn">Añadir al Carrito</button>
+                <img src="https://api.starlink.com/public-files/Mini_Right_Angled.png" alt="Starlink Mini Kit" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Mini'">
+                <h3 class="product-title">Starlink Mini Kit</h3>
+                <p class="product-desc">Ultra-portable, compact satellite internet ideal for users on the move.</p>
+                <div class="product-price">$639.00</div>
+                <div class="real-price">Market Value: $599.00</div>
+                <button class="btn" onclick="window.location.href='coming-soon.html'">Add to Cart</button>
             </article>
 
             <article class="product-card">
-                <img src="https://via.placeholder.com/300x300.png?text=Gorra+Diego" alt="Gorra Urbana">
-                <h3 class="product-title">Gorra Urbana</h3>
-                <p class="product-desc">Diseño ajustable y moderno para el día a día.</p>
-                <div class="product-price">$20.00</div>
-                <button class="btn">Añadir al Carrito</button>
+                <img src="https://api.starlink.com/public-files/Ethernet_Adapter.png" alt="Starlink Ethernet Adapter" onerror="this.src='https://via.placeholder.com/300x300.png?text=Ethernet+Adapter'">
+                <h3 class="product-title">Starlink Ethernet Adapter</h3>
+                <p class="product-desc">Hardwire your devices directly to the router for maximum stability.</p>
+                <div class="product-price">$65.00</div>
+                <div class="real-price">Market Value: $25.00</div>
+                <button class="btn" onclick="window.location.href='coming-soon.html'">Add to Cart</button>
             </article>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 El Mundo de Diego. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Diego's World. All rights reserved.</p>
     </footer>
 
 </body>
