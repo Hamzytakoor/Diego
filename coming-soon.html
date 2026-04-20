@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Mundo de Diego - Próximamente</title>
+    <title>El Mundo de Diego - Tienda</title>
     <style>
+        /* Variables y Reseteo Básico */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,16 +16,19 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Encabezado y Navegación */
         header {
             background-color: #2c3e50;
             color: #ecf0f1;
             padding: 1rem 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header h1 {
@@ -46,78 +50,267 @@
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         nav ul li a:hover {
             color: #3498db;
         }
 
-        /* Estilos Específicos para Próximamente */
-        .coming-soon-container {
-            flex: 1;
+        /* Sección Hero */
+        .hero {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 4rem 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        /* Cuadrícula de Productos */
+        .products-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            flex: 1 1 calc(33.333% - 20px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 3rem 20px;
         }
 
-        .coming-soon-container h2 {
-            font-size: 3rem;
-            color: #2c3e50;
-            margin-bottom: 1rem;
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 5px;
         }
         
-        .coming-soon-container p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 2rem;
+        .real-price {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            text-decoration: line-through;
+            margin-bottom: 15px;
         }
 
-        /* Animación Interactiva del Engranaje */
-        .gear-wrapper {
-            width: 150px;
-            height: 150px;
+        /* Botones */
+        .btn {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
             cursor: pointer;
-            margin: 0 auto;
+            border: none;
+            width: 100%;
+            margin-top: auto;
         }
 
-        .gear {
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Estilos del Carrito Lateral */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            fill: #3498db;
-            animation: spin 8s linear infinite;
-            transition: fill 0.3s ease;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 998;
         }
 
-        /* Al pasar el ratón se acelera y cambia de color */
-        .gear-wrapper:hover .gear {
-            fill: #e74c3c;
-            animation: spin 2.5s linear infinite;
+        #overlay.activo {
+            display: block;
         }
 
-        /* Al hacer clic y mantener presionado se acelera aún más */
-        .gear-wrapper:active .gear {
-            fill: #27ae60;
-            animation: spin 0.8s linear infinite;
+        .carrito-lateral {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: #fff;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            z-index: 999;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+        .carrito-lateral.abierto {
+            right: 0;
         }
 
+        .carrito-header {
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-cerrar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .carrito-items {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .carrito-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .carrito-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .carrito-item-info {
+            flex: 1;
+        }
+
+        .carrito-item-titulo {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .carrito-item-precio {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .btn-eliminar {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .carrito-footer {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .carrito-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: right;
+            color: #2c3e50;
+        }
+
+        .btn-pagar {
+            background-color: #27ae60;
+        }
+
+        .btn-pagar:hover {
+            background-color: #219653;
+        }
+
+        .carrito-vacio-msg {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 50px;
+        }
+
+        /* Pie de Página */
         footer {
             background-color: #2c3e50;
             color: #bdc3c7;
             text-align: center;
             padding: 1.5rem 0;
-            width: 100%;
+            margin-top: 3rem;
         }
-        
+
+        /* Diseño Responsivo */
+        @media (max-width: 768px) {
+            .product-card {
+                flex: 1 1 calc(50% - 20px);
+            }
+            .carrito-lateral {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
         @media (max-width: 480px) {
+            .product-card {
+                flex: 1 1 100%;
+            }
             nav ul li {
                 display: block;
                 margin: 10px 0;
@@ -134,26 +327,187 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="proximamente.html">Tienda</a></li>
                 <li><a href="proximamente.html">Nosotros</a></li>
-                <li><a href="proximamente.html">🛒 Carrito (0)</a></li>
+                <li><a id="abrir-carrito">🛒 Carrito (<span id="contador-carrito">0</span>)</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="coming-soon-container">
-        <h2>Volveremos Pronto</h2>
-        <p>Actualmente estamos actualizando nuestra tienda. ¡Interactúa con el engranaje mientras esperas!</p>
+    <div id="overlay"></div>
+
+    <div class="carrito-lateral" id="carrito-lateral">
+        <div class="carrito-header">
+            <h2>Tu Carrito</h2>
+            <button class="btn-cerrar" id="cerrar-carrito">&times;</button>
+        </div>
+        <div class="carrito-items" id="lista-carrito">
+            <p class="carrito-vacio-msg">Tu carrito está vacío.</p>
+        </div>
+        <div class="carrito-footer">
+            <div class="carrito-total">Total: $<span id="total-precio">0.00</span></div>
+            <button class="btn btn-pagar" onclick="window.location.href='proximamente.html'">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <h2>Conectividad de Nueva Generación</h2>
+        <p>Hardware satelital y de red premium directamente desde El Mundo de Diego.</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Hardware y Accesorios</h2>
         
-        <div class="gear-wrapper">
-            <svg class="gear" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 20C33.4 20 20 33.4 20 50C20 66.6 33.4 80 50 80C66.6 80 80 66.6 80 50C80 33.4 66.6 20 50 20ZM50 65C41.7 65 35 58.3 35 50C35 41.7 41.7 35 50 35C58.3 35 65 41.7 65 50C65 58.3 58.3 65 50 65Z" />
-                <path d="M90 45H83.8C82.5 39.5 79.9 34.5 76.1 30.3L80.5 25.9C81.3 25.1 81.3 23.8 80.5 23L77 19.5C76.2 18.7 74.9 18.7 74.1 19.5L69.7 23.9C65.5 20.1 60.5 17.5 55 16.2V10C55 8.9 54.1 8 53 8H47C45.9 8 45 8.9 45 10V16.2C39.5 17.5 34.5 20.1 30.3 23.9L25.9 19.5C25.1 18.7 23.8 18.7 23 19.5L19.5 23C18.7 23.8 18.7 25.1 19.5 25.9L23.9 30.3C20.1 34.5 17.5 39.5 16.2 45H10C8.9 45 8 45.9 8 47V53C8 54.1 8.9 55 10 55H16.2C17.5 60.5 20.1 65.5 23.9 69.7L19.5 74.1C18.7 74.9 18.7 76.2 19.5 77L23 80.5C23.8 81.3 25.1 81.3 25.9 80.5L30.3 76.1C34.5 79.9 39.5 82.5 45 83.8V90C45 91.1 45.9 92 47 92H53C54.1 92 55 91.1 55 90V83.8C60.5 82.5 65.5 79.9 69.7 76.1L74.1 80.5C74.9 81.3 76.2 81.3 77 80.5L80.5 77C81.3 76.2 81.3 74.9 80.5 74.1L76.1 69.7C79.9 65.5 82.5 60.5 83.8 55H90C91.1 55 92 54.1 92 53V47C92 45.9 91.1 45 90 45Z" />
-            </svg>
+        <div class="products-grid">
+            <article class="product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Starlink_dish.jpg/800px-Starlink_dish.jpg" alt="Kit Estándar Starlink">
+                <h3 class="product-title">Kit Estándar Starlink Gen 3</h3>
+                <p class="product-desc">Internet de alta velocidad y baja latencia con el avanzado router Wi-Fi 6.</p>
+                <div class="product-price">$389.00</div>
+                <div class="real-price">Valor de Mercado: $449.00</div>
+                <button class="btn agregar-carrito" data-id="1" data-nombre="Kit Estándar Starlink Gen 3" data-precio="389.00" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Starlink_dish.jpg/800px-Starlink_dish.jpg">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Starlink_satellite_dish_on_a_roof.jpg/800px-Starlink_satellite_dish_on_a_roof.jpg" alt="Kit Starlink Mini">
+                <h3 class="product-title">Kit Starlink Mini</h3>
+                <p class="product-desc">Internet satelital ultraportátil y compacto para despliegues rápidos.</p>
+                <div class="product-price">$289.00</div>
+                <div class="real-price">Valor de Mercado: $325.00</div>
+                <button class="btn agregar-carrito" data-id="2" data-nombre="Kit Starlink Mini" data-precio="289.00" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Starlink_satellite_dish_on_a_roof.jpg/800px-Starlink_satellite_dish_on_a_roof.jpg">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/RJ-45_plug.jpg/800px-RJ-45_plug.jpg" alt="Adaptador Ethernet">
+                <h3 class="product-title">Adaptador Ethernet Starlink</h3>
+                <p class="product-desc">Conecta tus dispositivos directamente al router para máxima estabilidad en la red.</p>
+                <div class="product-price">$65.00</div>
+                <div class="real-price">Valor de Mercado: $89.00</div>
+                <button class="btn agregar-carrito" data-id="3" data-nombre="Adaptador Ethernet Starlink" data-precio="65.00" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/RJ-45_plug.jpg/800px-RJ-45_plug.jpg">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://i.mt.lv/cdn/product_files/RB5009UGpSpIN_210757.png" alt="Router MikroTik RB5009">
+                <h3 class="product-title">Router MikroTik RB5009UG+S+IN</h3>
+                <p class="product-desc">Enrutador de grado empresarial ideal para gestionar múltiples usuarios y oficinas corporativas.</p>
+                <div class="product-price">$259.00</div>
+                <div class="real-price">Valor de Mercado: $315.00</div>
+                <button class="btn agregar-carrito" data-id="4" data-nombre="Router MikroTik RB5009" data-precio="259.00" data-img="https://i.mt.lv/cdn/product_files/RB5009UGpSpIN_210757.png">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://static.tp-link.com/TL-SG1016PE_UN_3.0_01_normal_1603348633785q.jpg" alt="Switch TP-Link Muscles">
+                <h3 class="product-title">Switch TP-Link TL-SG1016PE ("Muscles")</h3>
+                <p class="product-desc">El músculo de tu red: Switch PoE de 16 puertos para alimentar cámaras y puntos de acceso.</p>
+                <div class="product-price">$190.00</div>
+                <div class="real-price">Valor de Mercado: $240.00</div>
+                <button class="btn agregar-carrito" data-id="5" data-nombre="Switch TP-Link Muscles" data-precio="190.00" data-img="https://static.tp-link.com/TL-SG1016PE_UN_3.0_01_normal_1603348633785q.jpg">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/APC_Smart-UPS_1500.jpg/800px-APC_Smart-UPS_1500.jpg" alt="UPS de Respaldo Premium">
+                <h3 class="product-title">UPS Smart 1500VA (100% Cobre)</h3>
+                <p class="product-desc">Protección de energía con bobinado de cobre 100% puro para la máxima durabilidad del equipo.</p>
+                <div class="product-price">$490.00</div>
+                <div class="real-price">Valor de Mercado: $560.00</div>
+                <button class="btn agregar-carrito" data-id="6" data-nombre="UPS Smart 1500VA" data-precio="490.00" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/APC_Smart-UPS_1500.jpg/800px-APC_Smart-UPS_1500.jpg">Añadir al Carrito</button>
+            </article>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2026 El Mundo de Diego. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        let carrito = [];
+        const botonesAgregar = document.querySelectorAll('.agregar-carrito');
+        const listaCarrito = document.getElementById('lista-carrito');
+        const contadorCarrito = document.getElementById('contador-carrito');
+        const totalPrecio = document.getElementById('total-precio');
+        
+        const btnAbrirCarrito = document.getElementById('abrir-carrito');
+        const btnCerrarCarrito = document.getElementById('cerrar-carrito');
+        const panelCarrito = document.getElementById('carrito-lateral');
+        const overlay = document.getElementById('overlay');
+
+        function abrirPanel() {
+            panelCarrito.classList.add('abierto');
+            overlay.classList.add('activo');
+        }
+
+        function cerrarPanel() {
+            panelCarrito.classList.remove('abierto');
+            overlay.classList.remove('activo');
+        }
+
+        btnAbrirCarrito.addEventListener('click', abrirPanel);
+        btnCerrarCarrito.addEventListener('click', cerrarPanel);
+        overlay.addEventListener('click', cerrarPanel);
+
+        botonesAgregar.forEach(boton => {
+            boton.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                const nombre = e.target.getAttribute('data-nombre');
+                const precio = parseFloat(e.target.getAttribute('data-precio'));
+                const imagen = e.target.getAttribute('data-img');
+
+                agregarAlCarrito(id, nombre, precio, imagen);
+                abrirPanel();
+            });
+        });
+
+        function agregarAlCarrito(id, nombre, precio, imagen) {
+            const productoExistente = carrito.find(item => item.id === id);
+
+            if (productoExistente) {
+                productoExistente.cantidad++;
+            } else {
+                carrito.push({
+                    id: id,
+                    nombre: nombre,
+                    precio: precio,
+                    imagen: imagen,
+                    cantidad: 1
+                });
+            }
+            actualizarCarritoHTML();
+        }
+
+        window.eliminarDelCarrito = function(id) {
+            carrito = carrito.filter(item => item.id !== id);
+            actualizarCarritoHTML();
+        }
+
+        function actualizarCarritoHTML() {
+            listaCarrito.innerHTML = ''; 
+            let total = 0;
+            let cantidadTotal = 0;
+
+            if (carrito.length === 0) {
+                listaCarrito.innerHTML = '<p class="carrito-vacio-msg">Tu carrito está vacío.</p>';
+            } else {
+                carrito.forEach(producto => {
+                    const subtotal = producto.precio * producto.cantidad;
+                    total += subtotal;
+                    cantidadTotal += producto.cantidad;
+
+                    const itemDIV = document.createElement('div');
+                    itemDIV.classList.add('carrito-item');
+                    itemDIV.innerHTML = `
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                        <div class="carrito-item-info">
+                            <div class="carrito-item-titulo">${producto.nombre}</div>
+                            <div class="carrito-item-precio">$${producto.precio.toFixed(2)} x ${producto.cantidad}</div>
+                        </div>
+                        <button class="btn-eliminar" onclick="eliminarDelCarrito('${producto.id}')">X</button>
+                    `;
+                    listaCarrito.appendChild(itemDIV);
+                });
+            }
+
+            contadorCarrito.textContent = cantidadTotal;
+            totalPrecio.textContent = total.toFixed(2);
+        }
+    </script>
 
 </body>
 </html>
