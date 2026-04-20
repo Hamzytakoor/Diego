@@ -100,6 +100,8 @@
             padding: 20px;
             text-align: center;
             transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -108,7 +110,7 @@
 
         .product-card img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: contain;
             border-radius: 5px;
             margin-bottom: 15px;
@@ -124,7 +126,7 @@
             font-size: 0.9rem;
             color: #666;
             margin-bottom: 15px;
-            min-height: 40px;
+            flex-grow: 1;
         }
 
         .product-price {
@@ -154,13 +156,14 @@
             cursor: pointer;
             border: none;
             width: 100%;
+            margin-top: auto;
         }
 
         .btn:hover {
             background-color: #c0392b;
         }
 
-        /* --- ESTILOS DEL CARRITO INTERACTIVO --- */
+        /* Estilos del Carrito Lateral */
         #overlay {
             display: none;
             position: fixed;
@@ -179,7 +182,7 @@
         .carrito-lateral {
             position: fixed;
             top: 0;
-            right: -400px; /* Oculto fuera de la pantalla */
+            right: -400px;
             width: 400px;
             height: 100vh;
             background-color: #fff;
@@ -347,7 +350,7 @@
 
     <section class="hero">
         <h2>Conectividad de Nueva Generación</h2>
-        <p>Hardware satelital premium directamente desde El Mundo de Diego.</p>
+        <p>Hardware satelital y de red premium directamente desde El Mundo de Diego.</p>
     </section>
 
     <main class="container">
@@ -355,30 +358,57 @@
         
         <div class="products-grid">
             <article class="product-card">
-                <img src="https://api.starlink.com/public-files/Starlink_Standard_White.png" alt="Kit Estándar Starlink Gen 3" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Gen+3'">
+                <img src="https://api.starlink.com/public-files/Starlink_Standard_White.png" alt="Kit Estándar Starlink Gen 3" onerror="this.src='https://via.placeholder.com/300x200.png?text=Starlink+Gen+3'">
                 <h3 class="product-title">Kit Estándar Starlink Gen 3</h3>
                 <p class="product-desc">Internet de alta velocidad y baja latencia con el avanzado router Wi-Fi 6.</p>
-                <div class="product-price">$639.00</div>
-                <div class="real-price">Valor de Mercado: $599.00</div>
-                <button class="btn agregar-carrito" data-id="1" data-nombre="Kit Estándar Starlink Gen 3" data-precio="639.00" data-img="https://api.starlink.com/public-files/Starlink_Standard_White.png">Añadir al Carrito</button>
+                <div class="product-price">$389.00</div>
+                <div class="real-price">Valor de Mercado: $349.00</div>
+                <button class="btn agregar-carrito" data-id="1" data-nombre="Kit Estándar Starlink Gen 3" data-precio="389.00" data-img="https://api.starlink.com/public-files/Starlink_Standard_White.png">Añadir al Carrito</button>
             </article>
 
             <article class="product-card">
-                <img src="https://api.starlink.com/public-files/Mini_Right_Angled.png" alt="Kit Starlink Mini" onerror="this.src='https://via.placeholder.com/300x300.png?text=Starlink+Mini'">
+                <img src="https://api.starlink.com/public-files/Mini_Right_Angled.png" alt="Kit Starlink Mini" onerror="this.src='https://via.placeholder.com/300x200.png?text=Starlink+Mini'">
                 <h3 class="product-title">Kit Starlink Mini</h3>
-                <p class="product-desc">Internet satelital ultraportátil y compacto, ideal para usuarios en movimiento.</p>
-                <div class="product-price">$639.00</div>
-                <div class="real-price">Valor de Mercado: $599.00</div>
-                <button class="btn agregar-carrito" data-id="2" data-nombre="Kit Starlink Mini" data-precio="639.00" data-img="https://api.starlink.com/public-files/Mini_Right_Angled.png">Añadir al Carrito</button>
+                <p class="product-desc">Internet satelital ultraportátil y compacto para despliegues rápidos.</p>
+                <div class="product-price">$289.00</div>
+                <div class="real-price">Valor de Mercado: $249.00</div>
+                <button class="btn agregar-carrito" data-id="2" data-nombre="Kit Starlink Mini" data-precio="289.00" data-img="https://api.starlink.com/public-files/Mini_Right_Angled.png">Añadir al Carrito</button>
             </article>
 
             <article class="product-card">
-                <img src="https://api.starlink.com/public-files/Ethernet_Adapter.png" alt="Adaptador Ethernet Starlink" onerror="this.src='https://via.placeholder.com/300x300.png?text=Adaptador+Ethernet'">
+                <img src="https://api.starlink.com/public-files/Ethernet_Adapter.png" alt="Adaptador Ethernet Starlink" onerror="this.src='https://via.placeholder.com/300x200.png?text=Adaptador+Ethernet'">
                 <h3 class="product-title">Adaptador Ethernet Starlink</h3>
-                <p class="product-desc">Conecta tus dispositivos directamente al router para máxima estabilidad.</p>
+                <p class="product-desc">Conecta tus dispositivos directamente al router para máxima estabilidad en la red.</p>
                 <div class="product-price">$65.00</div>
                 <div class="real-price">Valor de Mercado: $25.00</div>
                 <button class="btn agregar-carrito" data-id="3" data-nombre="Adaptador Ethernet Starlink" data-precio="65.00" data-img="https://api.starlink.com/public-files/Ethernet_Adapter.png">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x200.png?text=MikroTik+RB5009" alt="Router MikroTik RB5009UG+S+IN">
+                <h3 class="product-title">Router MikroTik RB5009UG+S+IN</h3>
+                <p class="product-desc">Enrutador de grado empresarial ideal para gestionar múltiples usuarios y oficinas corporativas.</p>
+                <div class="product-price">$259.00</div>
+                <div class="real-price">Valor de Mercado: $219.00</div>
+                <button class="btn agregar-carrito" data-id="4" data-nombre="Router MikroTik RB5009" data-precio="259.00" data-img="https://via.placeholder.com/300x200.png?text=MikroTik+RB5009">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x200.png?text=Switch+Muscles" alt="Switch TP-Link TL-SG1016PE">
+                <h3 class="product-title">Switch TP-Link TL-SG1016PE ("Muscles")</h3>
+                <p class="product-desc">El músculo de tu red: Switch PoE de 16 puertos para alimentar cámaras y puntos de acceso.</p>
+                <div class="product-price">$190.00</div>
+                <div class="real-price">Valor de Mercado: $150.00</div>
+                <button class="btn agregar-carrito" data-id="5" data-nombre="Switch TP-Link Muscles" data-precio="190.00" data-img="https://via.placeholder.com/300x200.png?text=Switch+Muscles">Añadir al Carrito</button>
+            </article>
+
+            <article class="product-card">
+                <img src="https://via.placeholder.com/300x200.png?text=UPS+100%25+Cobre" alt="UPS de Respaldo Premium">
+                <h3 class="product-title">UPS Smart 1500VA (100% Cobre)</h3>
+                <p class="product-desc">Protección de energía con bobinado de cobre 100% puro para la máxima durabilidad del equipo.</p>
+                <div class="product-price">$490.00</div>
+                <div class="real-price">Valor de Mercado: $450.00</div>
+                <button class="btn agregar-carrito" data-id="6" data-nombre="UPS Smart 1500VA" data-precio="490.00" data-img="https://via.placeholder.com/300x200.png?text=UPS+100%25+Cobre">Añadir al Carrito</button>
             </article>
         </div>
     </main>
@@ -388,7 +418,6 @@
     </footer>
 
     <script>
-        // Variables principales
         let carrito = [];
         const botonesAgregar = document.querySelectorAll('.agregar-carrito');
         const listaCarrito = document.getElementById('lista-carrito');
@@ -400,7 +429,6 @@
         const panelCarrito = document.getElementById('carrito-lateral');
         const overlay = document.getElementById('overlay');
 
-        // Funciones para abrir y cerrar el panel lateral
         function abrirPanel() {
             panelCarrito.classList.add('abierto');
             overlay.classList.add('activo');
@@ -415,7 +443,6 @@
         btnCerrarCarrito.addEventListener('click', cerrarPanel);
         overlay.addEventListener('click', cerrarPanel);
 
-        // Añadir evento a todos los botones "Añadir al Carrito"
         botonesAgregar.forEach(boton => {
             boton.addEventListener('click', (e) => {
                 const id = e.target.getAttribute('data-id');
@@ -424,12 +451,11 @@
                 const imagen = e.target.getAttribute('data-img');
 
                 agregarAlCarrito(id, nombre, precio, imagen);
-                abrirPanel(); // Abre el carrito automáticamente para que el usuario vea su producto
+                abrirPanel();
             });
         });
 
         function agregarAlCarrito(id, nombre, precio, imagen) {
-            // Verificar si el producto ya está en el carrito
             const productoExistente = carrito.find(item => item.id === id);
 
             if (productoExistente) {
@@ -443,17 +469,16 @@
                     cantidad: 1
                 });
             }
-            actualizarCarrito HTML();
+            actualizarCarritoHTML();
         }
 
-        function eliminarDelCarrito(id) {
+        window.eliminarDelCarrito = function(id) {
             carrito = carrito.filter(item => item.id !== id);
-            actualizarCarrito HTML();
+            actualizarCarritoHTML();
         }
 
-        // Renderizar el carrito visualmente
-        function actualizarCarrito HTML() {
-            listaCarrito.innerHTML = ''; // Limpiar lista
+        function actualizarCarritoHTML() {
+            listaCarrito.innerHTML = ''; 
             let total = 0;
             let cantidadTotal = 0;
 
@@ -479,7 +504,6 @@
                 });
             }
 
-            // Actualizar contadores y totales en el HTML
             contadorCarrito.textContent = cantidadTotal;
             totalPrecio.textContent = total.toFixed(2);
         }
